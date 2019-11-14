@@ -1,0 +1,49 @@
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="logo-cell" text-center>
+        <!--
+        <ion-icon name="checkmark-circle-outline" margin-top></ion-icon>
+        -->
+        <ion-img class="center" style="width: 80px; height: 80px; align-items: center;" src="assets/img/dvir-logo-small.png" margin-top></ion-img>
+        <p margin-top>Nestle DVIR</p>
+      </ion-col>
+    </ion-row>
+    <form [formGroup]="loginGroup">
+      <ion-row>
+        <ion-col class="login-form">
+          <ion-item>
+            <ion-icon name="person" padding-end></ion-icon>
+            <ion-input
+                [value]="username"
+                formControlName="name"
+                placeholder="User Name"
+                type="text"
+                required="true"
+                (ionFocus)="resetLoginFailedMessage()"
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="lock" padding-end></ion-icon>
+            <ion-input
+                placeholder="Password"
+                type="password"
+                required="true"
+                (ionFocus)="resetLoginFailedMessage()"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-card color="danger" padding *ngIf="loginFailedMessage">
+        {{ loginFailedMessage }}
+      </ion-card>
+      <ion-row>
+        <ion-col padding-top>
+          <ion-button class="login-button" fill="outline" color="light" expand="block" type="submit" (click)="login()">
+            Log In
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>

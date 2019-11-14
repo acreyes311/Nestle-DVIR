@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>New Trip</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+      <!--<ion-button (click)="fetchList(1)">-->
+        Load
+      <!--</ion-button>-->
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h2>New Report</h2>
+  <ion-text color="medium">
+    <p>Create a new DVIR for this trip.</p>
+  </ion-text>
+  <ion-list margin-horizontal="">
+    <ion-item no-padding>
+      <ion-label position="stacked">TRIP TYPE</ion-label>
+      <ion-select #value (ionChange)="changeTrip(value.value)" placeholder="Select Trip">
+        <ion-select-option value="pre-trip">Pre-Trip</ion-select-option>
+        <ion-select-option value="post-trip">Post-Trip</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item no-padding>
+      <ion-label position="stacked">TRACTOR/TRUCK NO.</ion-label>
+      <ion-input placeholder="123456 " type="text" required="true"></ion-input>
+    </ion-item>
+    <ion-item no-padding>
+      <ion-label position="stacked">ODOMETER READING</ion-label>
+      <ion-input type="number" required="true"></ion-input>
+    </ion-item>
+    <ion-item no-padding>
+      <ion-label position="stacked">TRAILER NO.</ion-label>
+      <ion-input placeholder="654321" type="text" required="true"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button
+      [disabled]="!checkFormComplete()"
+      expand="block"
+      color="primary"
+      margin-top
+      (click) = "initializeChecklist()"
+      routerLink="{{'/form/' + tripType}}"
+  >
+    Next
+  </ion-button>
+  <!--<ion-button expand="block" color="primary" margin-top routerLink="{{'/form/' + tripType}}">Load</ion-button>-->
+</ion-content>

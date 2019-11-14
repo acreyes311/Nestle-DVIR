@@ -1,0 +1,55 @@
+language: node_js
+node_js:
+  - "10.14.2"
+jdk: oraclejdk8
+before_cache:
+# Do not cache a few Gradle files/directories (see https://docs.travis-ci.com/user/languages/java/#Caching)
+#- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+#- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  npm: true
+#  directories:
+#    # Android SDK
+#    - $HOME/android-sdk-dl
+#    - $HOME/android-sdk
+#
+#    # Gradle dependencies
+#    - $HOME/.gradle/caches/
+#    - $HOME/.gradle/wrapper/
+#
+#    # Android build cache (see http://tools.android.com/tech-docs/build-cache)
+#    - $HOME/.android/build-cache
+#addons:
+#  artifacts:
+#    working_dir: $HOME/build/LeoYulinLi/dvir-prototype/platforms/android/app/build/outputs/
+#    target_paths: artifacts/${TRAVIS_BUILD_NUMBER}/${TRAVIS_JOB_NUMBER}
+#    paths:
+#    - apk/
+install:
+  - echo '|1|atgKlcjGho2Of8sIq7nZWRDHbpE=|8V6E1XHoMPAWtR+dmZqQskuOyvE= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBCwWLmtzFtpqGBlG+hGAiRsNqQrTrRdH7l2ZzBe/L9Y4rOx6LyuO2zb8JIxduM3vYzGryxI3sm0xnCVOX+mwzcU=' >> $HOME/.ssh/known_hosts
+#  # Download and unzip the Android SDK tools (if not already there thanks to the cache mechanism)
+#  # Latest version available here: https://developer.android.com/studio/#command-tools
+#  - if test ! -e $HOME/android-sdk-dl/sdk-tools.zip ; then curl https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip > $HOME/android-sdk-dl/sdk-tools.zip ; fi
+#  - unzip -qq -n $HOME/android-sdk-dl/sdk-tools.zip -d $HOME/android-sdk
+#
+#  # Install or update Android SDK components (will not do anything if already up to date thanks to the cache mechanism)
+#  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'tools' > /dev/null
+#  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'platform-tools' > /dev/null
+#  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'build-tools;27.0.3' > /dev/null
+#  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'platforms;android-27' > /dev/null
+#  - echo y | $HOME/android-sdk/tools/bin/sdkmanager 'extras;google;m2repository' > /dev/null
+
+env:
+  - ANDROID_HOME=$HOME/android-sdk
+branches:
+  only:
+  - master
+before_script:
+#  - npm install -g ionic cordova
+  - npm install -g ionic
+  - npm i -D -E @angular/cli
+script:
+  - ionic build --prod
+
+after_success:
+  - rsync -az --delete-after --quiet $TRAVIS_BUILD_DIR/www/ site@35.236.41.61:~/www/

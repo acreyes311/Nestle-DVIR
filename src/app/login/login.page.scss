@@ -1,0 +1,37 @@
+ion-content {
+  --background: linear-gradient(var(--theme-base-color), var(--theme-light-color));
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form ion-item {
+  --background: #00000000;
+  color: white;
+  font-family: monospace;
+}
+
+.login-form ion-item > ion-icon {
+  color: white;
+  opacity: 0.5; // TODO: go get the opacity from ion-item
+}
+
+.login-button {
+  --border-width: 1px;
+}
+
+.logo-cell {
+  font-size: 48px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 200;
+  color: white;
+}
+
+.logo-cell > ion-icon {
+  font-size: 72px;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
